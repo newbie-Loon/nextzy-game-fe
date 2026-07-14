@@ -9,7 +9,6 @@ import RewardModal from "../home/components/rewardModal";
 
 export default function LoginPage() {
     const router = useRouter();
-    const [open, setOpen] = useState(false);
 
     const handleGuestLogin = async () => {
         const userCookie: string | null = CookieService.get("user") || null;
@@ -36,11 +35,6 @@ export default function LoginPage() {
                     </div>
                 </div>
             </div>
-            <RewardModal
-        open={open}
-        reward="A"
-        onClose={() => setOpen(false)}
-      />
         </>
     );
 }

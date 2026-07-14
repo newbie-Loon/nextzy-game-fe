@@ -36,8 +36,12 @@ export default function HomePage() {
     },
   ];
 
+  const initData = async () => {
+    
+  }
+
   return (
-    <div className="mx-auto min-h-screen mx-auto max-w-md bg-gray-100">
+    <div className="mx-auto min-h-screen mx-auto max-w-2xl bg-gray-100 pr-6 pl-6">
       <div className="pb-24">
         <div className="p-4">
           <ProgressCard />
@@ -60,7 +64,7 @@ export default function HomePage() {
           </div>
         </div>
       
-      <PlayGameButton />
+      <PlayGameButton page="home"/>
       </div>
     </div>
   );
