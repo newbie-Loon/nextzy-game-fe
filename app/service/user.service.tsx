@@ -5,14 +5,20 @@ import { apiFetch } from "./api";
 
 export const UserService = {
 
-  async createUser(data: string | null, guest : boolean) : Promise<User>{
+  async createUser(userId: string | null, guest : boolean) : Promise<User>{
     const req = {
       guest : guest,
-      userId : data
+      userId : userId
     }
     return apiFetch("/users/create", {
       method: "POST",
       body: JSON.stringify(req),
+    });
+  },
+
+  async getUserData(userId: string) : Promise<User>{
+    return apiFetch("/users/getUserData/"+userId, {
+      method: "GET",
     });
   },
 

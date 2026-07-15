@@ -4,9 +4,9 @@ import { apiFetch } from "./api";
 
 export const GameService = {
 
-  async resetProgress(data: string | null){
+  async resetProgress(userId: string | null){
     const req = {
-      userId : data
+      userId : userId
     }
     return apiFetch("/game/resetProgress", {
       method: "POST",
@@ -14,11 +14,6 @@ export const GameService = {
     });
   },
 
-  async getGameCheckpoint(){
-    return apiFetch("/game/getGameCheckpoint", {
-      method: "GET",
-    });
-  },
 
 
 };

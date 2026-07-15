@@ -14,7 +14,7 @@ export default function LoginPage() {
         const userCookie: string | null = CookieService.get("user") || null;
         console.log("userCookie ", userCookie)
         const user = await UserService.createUser(userCookie, true)
-        CookieService.set("user", user.userId);
+        CookieService.set("nextzyGameUser", user.userId);
         router.push("/home");
     };
 
