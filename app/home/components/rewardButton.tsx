@@ -12,7 +12,7 @@ export default function RewardButton({
   status,
   onClick,
 }: RewardButtonProps) {
-  
+
   const styles = {
     claimed: "bg-[#F58A8A] text-white",
     available: "bg-[#FF1515] text-white",
@@ -31,19 +31,20 @@ export default function RewardButton({
         disabled={status === "locked"}
         onClick={onClick}
         className={`
+        w-21
+        text-[8px]
         rounded-full
-        px-4
         py-2
-        text-xs
         font-bold
         transition-all
+        mr-15
         ${styles[status]}
       `}
       >
         {text[status]}
       </button>
 
-      
+
     </>
   );
 }

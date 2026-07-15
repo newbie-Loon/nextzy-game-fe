@@ -2,7 +2,7 @@ import ProgressBar from "./progressBar";
 
 export default function ProgressCard() {
   return (
-    <div className="rounded-3xl border-2 border-gray-300 bg-white p-4">
+    <div className="rounded-3xl border-2 border-gray-300 bg-white p-4 min-w-xs">
       <div className="flex justify-between pb-3">
         <button className="rounded-r-full bg-[#B63335] px-4 py-2 max-h-[22px] text-sm font-bold text-white pb-7 ml-[-18px]">
           แชร์คะแนน
@@ -21,7 +21,7 @@ export default function ProgressCard() {
         </div>
       </div>
 
-      <ProgressBar score={6000} />
+      <ProgressBar score={10000} />
     </div>
   );
 }

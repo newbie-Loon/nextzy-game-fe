@@ -12,7 +12,7 @@ export default function PlayHistoryList({
       {items.map((item) => (
         <div
           key={item.id}
-          className="flex items-center gap-4 border-b bg-white p-6"
+          className="flex items-center gap-4 border-b bg-white p-6 min-w-xs"
         >
           <div className="h-12 w-12 rounded-full bg-gradient-to-b from-red-700 to-red-400" />
 

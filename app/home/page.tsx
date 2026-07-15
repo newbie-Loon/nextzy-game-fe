@@ -37,13 +37,22 @@ export default function HomePage() {
   ];
 
   const initData = async () => {
-    
+    // const result = await PointHistoryService.create({
+    //   userId,
+    //   point: winnerPoint,
+    // });
+
+    // setTotalPoint(result.totalPoint);
+
+    // setRewardPoint(result.earnedPoint);
+
+    // setOpen(true);
   }
 
   return (
-    <div className="mx-auto min-h-screen mx-auto max-w-2xl bg-gray-100 pr-6 pl-6">
+    <div className="mx-auto min-h-screen mx-auto max-w-lg min-w-md bg-gray-100 pr-6 pl-6 ">
       <div className="pb-24">
-        <div className="p-4">
+        <div className="pb-3">
           <ProgressCard />
         </div>
 
@@ -63,8 +72,9 @@ export default function HomePage() {
             )}
           </div>
         </div>
-      
-      <PlayGameButton page="home"/>
+        <div className="pr-10 pt-10">
+          <PlayGameButton page="home" />
+        </div>
       </div>
     </div>
   );
