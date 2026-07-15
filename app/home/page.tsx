@@ -1,12 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProgressCard from "@/app/home/components/progressCard";
 import ResetButton from "@/app/home/components/resetButton";
 import HistoryTabs from "@/app/home/components/historyTabs";
 import PlayHistoryList from "@/app/home/components/playHistoryList";
 import RewardHistoryList from "@/app/home/components/rewardHistoryList";
 import PlayGameButton from "@/app/home/components/playGameButton";
+import { UserService } from "../service/user.service";
+import { CookieService } from "../util/cookie.util";
+import LoadingScreen from "../components/common/LoadingScreen";
+import { UserData } from "../interface/user";
 
 
 
@@ -14,6 +18,9 @@ export default function HomePage() {
   const [activeTab, setActiveTab] = useState<
     "play" | "reward"
   >("play");
+
+  const [userData, setUserData] = useState<UserData>();
+  const [loading, setLoading] = useState(false);
 
   const playHistory = [
     {
@@ -36,17 +43,47 @@ export default function HomePage() {
     },
   ];
 
+
+
   const initData = async () => {
-    // const result = await PointHistoryService.create({
-    //   userId,
-    //   point: winnerPoint,
-    // });
+    try {
+      const userId = CookieService.get("nextzyGameUser");
 
-    // setTotalPoint(result.totalPoint);
+      if (!userId) {
+        console.error("userId not found");
+        return;
+      }
 
-    // setRewardPoint(result.earnedPoint);
+      const result = await UserService.getUserData(userId);
 
-    // setOpen(true);
+      console.log(result);
+      setUserData(result);
+  } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+
+  }
+
+  useEffect(() => {
+    const loadGameData = async () => {
+      try {
+        setLoading(true);
+        await initData(); // Wait for data to load
+
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false); // Called asynchronously inside a callback, which is safe
+      }
+    };
+
+    loadGameData();
+  }, []);
+
+  if (loading) {
+    return <LoadingScreen />;
   }
 
   return (
