@@ -4,7 +4,7 @@ import { apiFetch } from "./api";
 
 export const RewardHistoryService = {
 
-  async createRewardHistory(userId: string | null, reward: number){
+  async createRewardHistory(userId: string, reward: string){
     const req = {
       userId : userId,
       reward: reward
@@ -14,13 +14,5 @@ export const RewardHistoryService = {
       body: JSON.stringify(req),
     });
   },
-
-//   async getRewardHistory(){
-//     return apiFetch("/reward-history/get", {
-//       method: "GET",
-//     });
-//   },
-
-
-
+  
 };

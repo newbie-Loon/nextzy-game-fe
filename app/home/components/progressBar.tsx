@@ -2,27 +2,49 @@
 
 import RewardButton from "@/app/home/components/rewardButton";
 import RewardModal from "./rewardModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Rewards } from "@/app/interface/rewards";
 
 interface ProgressBarProps {
   score: number;
+  reward?: Rewards;
+  click: (reward: string) => void;
 }
 
 const checkpoints = [0, 5000, 7500, 10000];
 
+export default function ProgressBar({ score, reward, click }: ProgressBarProps) {
+  const rewards = [
+    {
+      point: 5000,
+      reward: "A",
+      claimed: reward?.a ?? false,
+    },
+    {
+      point: 7500,
+      reward: "B",
+      claimed: reward?.b ?? false,
+    },
+    {
+      point: 10000,
+      reward: "C",
+      claimed: reward?.c ?? false,
+    },
+  ];
+  useEffect(() => {
 
-export default function ProgressBar({ score }: ProgressBarProps) {
-    const [open, setOpen] = useState(false);
+    console.log("reward", reward);
+
+    console.log("rewards", rewards);
+
+  }, [reward]);
 
   const percentage = Math.min((score / 10000) * 100, 100);
-  const handleClaimReward = (rewardName: string) => {
-    console.log(rewardName)
-  }
   return (
     <>
       <div className="max-w-lg mx-auto">
         {/* Label */}
-        <div className="relative w-full pb-7">
+        <div className="relative w-full pb-10">
           {checkpoints.map((point) => {
             const left = (point / 10000) * 100;
             return (
@@ -54,9 +76,14 @@ export default function ProgressBar({ score }: ProgressBarProps) {
           </div>
 
           {/* Checkpoints */}
-          {checkpoints.map((point) => {
+          {checkpoints.map((point, index) => {
             const left = (point / 10000) * 100;
             const reached = score >= point;
+            let claimed = false;
+
+            if (point === 5000) claimed = reward?.a ?? false;
+            if (point === 7500) claimed = reward?.b ?? false;
+            if (point === 10000) claimed = reward?.c ?? false;
 
             return (
               <div
@@ -66,12 +93,55 @@ export default function ProgressBar({ score }: ProgressBarProps) {
                   left: `${left}%`,
                 }}
               >
-                <div
-                  className={`h-5 w-5 rounded-full transition-all ${left == 0 ? "" : left == 10000 ? "" : reached
-                    ? "border-2 border-orange-500 bg-orange-500"
-                    : "border-2 border-gray-300 bg-white"
-                    }`}
-                />
+                {point !== 0 &&
+                  (
+                    point === 10000 ? (
+                      claimed ? (
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-green-700 text-white">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="white"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-4 w-4"
+                          >
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                        </div>
+                      ) : (
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-yellow-400 border-2 border-yellow-500 shadow-sm">
+                          <svg
+                            className="h-8 w-8 fill-[#F59E0B]"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M3 7l4 3 5-6 5 6 4-3-2 12H5L3 7z" />
+                          </svg>
+                        </div>
+                      )
+                    ) : (
+                      <div
+                        className={`flex h-7 w-7 items-center justify-center rounded-full text-white
+                          ${claimed ? "bg-green-700" : "bg-gray-400"}`}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="white"
+                          strokeWidth="3"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="h-4 w-4"
+                        >
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      </div>
+                    )
+                  )
+
+                }
               </div>
             );
           })}
@@ -79,25 +149,31 @@ export default function ProgressBar({ score }: ProgressBarProps) {
         </div>
 
         <div className="relative w-full pb-7">
-          {checkpoints.map((point) => {
-            const left = (point / 10000) * 100;
-            const reached = score >= point;
-            if (point != 0) {
+          {rewards.map((item) => {
+            const left = (item.point / 10000) * 100;
+            const reached = score >= item.point;
+            if (item.point != 0) {
               return (
                 <div
-                  key={point}
+                  key={item.reward}
                   className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
                   style={{
                     left: `${left}%`,
                   }}
                 >
-                  <div className={`transition-all text-xs font-medium flex text-gray-500`}>
-                    <RewardButton
-                      reward="B"
-                      status={reached ? "available" : "locked"}
-                      onClick={() => handleClaimReward("B")}
-                    />
-                  </div>
+                  <RewardButton
+                    reward={item.reward}
+                    status={
+                      item.claimed
+                        ? "claimed"
+                        : score >= item.point
+                          ? "available"
+                          : "locked"
+                    }
+                    onClick={() =>
+                      click(item.reward)
+                    }
+                  />
                 </div>
               );
             }
@@ -105,12 +181,6 @@ export default function ProgressBar({ score }: ProgressBarProps) {
         </div>
 
       </div>
-
-      <RewardModal
-        open={open}
-        reward="A"
-        onClose={() => setOpen(false)}
-      />
     </>
   );
 }

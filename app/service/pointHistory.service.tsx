@@ -14,12 +14,5 @@ export const PointHistoryService = {
       body: JSON.stringify(req),
     });
   },
-
-//   async getPointHistory(){
-//     return apiFetch("/point-history/get", {
-//       method: "GET",
-//     });
-//   },
-
-
+  
 };

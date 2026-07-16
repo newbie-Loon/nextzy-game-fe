@@ -28,7 +28,7 @@ export default function RewardButton({
   return (
     <>
       <button
-        disabled={status === "locked"}
+        disabled={status === "locked" || status === "claimed"}
         onClick={onClick}
         className={`
         w-21

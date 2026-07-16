@@ -8,7 +8,7 @@ export interface User {
 
 export interface UserData {
   user: User
-  reward:Rewards
+  rewards:Rewards
   playHistory:PlayHistory[]
   rewardHistory:RewardHistory[]
 }
