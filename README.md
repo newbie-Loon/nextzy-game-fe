@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nextzy-Game-BE
 
-## Getting Started
+## Frontend Setup
 
-First, run the development server:
+### Navigate to frontend folder
+cd nextzy-game-fe
 
-```bash
+### Install dependencies
+npm install
+
+### Create .env
+NEXT_PUBLIC_API_URL=http://localhost:8080
+
+### Run application
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Frontend Server
+http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+--- 
+# 2. Architecture Explanation (การอธิบายสถาปัตยกรรม) 
+```md # Architecture The application uses a Client-Server Architecture. ```
+text 
+┌─────────────┐ 
+│ Next.js     │ 
+│ Frontend UI │ 
+└──────┬──────┘ 
+       │ REST API 
+       ▼ 
+┌─────────────┐ 
+│ Gin Backend │ 
+│ Business    │ 
+│ Logic       │ 
+└──────┬──────┘ 
+       │ GORM 
+       ▼ 
+┌─────────────┐ 
+│ PostgreSQL  │ 
+│ Database    │ 
+└─────────────┘
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 3. Feature Explanation (การอธิบาย Features) 
+```md 
+# Features 
+## Home Page 
+### Accumulated Points 
+    - Displays user accumulated score 
+    - Maximum score displayed is 10,000 
+    - Progress bar visualizes progression 
+### Reward Checkpoints 
+Three reward checkpoints available:
+ | Reward | Required Score |
+ |--------|----------------| 
+ |    A   | 5,000          | 
+ |    B   | 7,500          | 
+ |    C   | 10,000         | 
+ 
+ ### Reward Claim 
+ Users can:
+ 
+  - Claim reward once eligible 
+  - Receive success modal 
+  - Prevent duplicate claims 
 
-## Learn More
+### History 
+Two tabs available: 
 
-To learn more about Next.js, take a look at the following resources:
+#### Play History 
+Displays game results: 
+- 300 points 
+- 500 points 
+- 1000 points 
+- 3000 points 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### Reward History 
+Displays rewards claimed: 
+- Reward A 
+- Reward B 
+- Reward C 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Reset Progress 
 
-## Deploy on Vercel
+Tester can: 
+- Reset accumulated score 
+- Clear play history 
+- Clear reward history 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+--- 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Game Page 
+### Random Point Selection Available points: 
+- 300 
+- 500 
+- 1000 
+- 3000 
+
+### Elimination Animation When clicking "สุ่มคะแนน":
+
+ - Points are eliminated one by one 
+ - Last remaining point becomes the reward 
+ 
+ ### Reward Modal After game completion: 
+ 
+ - Display won score 
+ - User remains on Game Page 
+ - User can continue playing immediately 
+ 
+ ### Score Accumulation Won score is stored in: 
+ - Point History 
+ - User accumulated score

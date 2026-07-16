@@ -14,7 +14,7 @@ type GameState = "idle" | "playing" | "finished";
 export default function GamePage() {
     const [state, setState] = useState<GameState>("idle");
     const [points, setPoints] = useState<number[]>(POINTS);
-    const [totalScore, setTotalScore] = useState(8500);
+    const [totalScore, setTotalScore] = useState(0);
     const [reward, setReward] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [eliminated, setEliminated] = useState<number[]>([]);
