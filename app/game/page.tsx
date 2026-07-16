@@ -61,7 +61,7 @@ export default function GamePage() {
     };
 
     return (
-        <div className="mx-auto min-h-screen max-w-lg bg-[#f7f1e8] min-w-md pb-100">
+        <div className="mx-auto min-h-screen max-w-lg  bg-gradient-to-b from-[#FFFFFF] to-[#f5e4cf] min-w-md pb-100">
 
             <div className="p-6">
 

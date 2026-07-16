@@ -3,15 +3,13 @@
 import { useRouter } from "next/navigation";
 import Image from 'next/image'
 import { UserService } from "../service/user.service";
-import { useState } from "react";
 import { CookieService } from "../util/cookie.util";
-import RewardModal from "../home/components/rewardModal";
 
 export default function LoginPage() {
     const router = useRouter();
 
     const handleGuestLogin = async () => {
-        const userCookie: string | null = CookieService.get("user") || null;
+        const userCookie: string | null = CookieService.get("nextzyGameUser") || null;
         console.log("userCookie ", userCookie)
         const user = await UserService.createUser(userCookie, true)
         CookieService.set("nextzyGameUser", user.userId);

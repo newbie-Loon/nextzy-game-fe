@@ -1,7 +1,9 @@
-import { HistoryItem } from "@/app/interface/history";
+import { PlayHistory } from "@/app/interface/rewards";
+import { formatDateTime } from "@/app/util/date.util";
+import { useEffect } from "react";
 
 interface Props {
-  items: HistoryItem[];
+  items: PlayHistory[];
 }
 
 export default function PlayHistoryList({
@@ -18,11 +20,11 @@ export default function PlayHistoryList({
 
           <div>
             <h3 className="text-lg font-bold text-[#333333]">
-              {item.title}
+               {item.point ? "เล่นได้ " + item.point.toLocaleString() + "คะแนน": ""} 
             </h3>
 
             <p className="text-sm text-[#A3A3A3]">
-              เล่นเมื่อ {item.date}
+              เล่นเมื่อ {formatDateTime(item.earnedDate)} น.
             </p>
           </div>
         </div>

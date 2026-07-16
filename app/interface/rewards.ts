@@ -6,12 +6,12 @@ export interface Rewards {
 
 export interface PlayHistory {
   id: number;
-  score: number;
-  date: string;
+  point: number;
+  earnedDate: string;
 }
 
 export interface RewardHistory {
   id: number;
   reward: string;
-  date: string;
+  createdAt: string;
 }

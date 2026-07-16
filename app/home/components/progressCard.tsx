@@ -1,6 +1,10 @@
+import { UserData } from "@/app/interface/user";
 import ProgressBar from "./progressBar";
+interface ProgressCardProps {
+  userData?: UserData;
+}
 
-export default function ProgressCard() {
+export default function ProgressCard({ userData }: ProgressCardProps) {
   return (
     <div className="rounded-3xl border-2 border-gray-300 bg-white p-4 min-w-xs">
       <div className="flex justify-between pb-3">
@@ -16,12 +20,12 @@ export default function ProgressCard() {
           </p>
 
           <p className="text-2xl font-bold text-red-600">
-            8,500/10,000
+            {userData?.user?.point && userData?.user?.point > 10000 ? "10,000" : userData?.user.point.toLocaleString() ?? 0}/10,000
           </p>
         </div>
       </div>
 
-      <ProgressBar score={10000} />
+      <ProgressBar score={userData?.user.point ?? 0} />
     </div>
   );
 }

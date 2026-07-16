@@ -3,7 +3,7 @@ import { CookieService } from "@/app/util/cookie.util";
 
 export default function ResetButton() {
   const resetProgress = async ()=>{
-    const userCookie: string | null = CookieService.get("user") || null;
+    const userCookie: string | null = CookieService.get("nextzyGameUser") || null;
     console.log("userCookie ", userCookie)
     try{
       await GameService.resetProgress(userCookie)

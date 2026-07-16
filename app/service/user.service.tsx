@@ -1,4 +1,4 @@
-import { User } from "../interface/user";
+import { User, UserData } from "../interface/user";
 import { apiFetch } from "./api";
 
 
@@ -16,7 +16,7 @@ export const UserService = {
     });
   },
 
-  async getUserData(userId: string) : Promise<User>{
+  async getUserData(userId: string) : Promise<UserData>{
     return apiFetch("/users/getUserData/"+userId, {
       method: "GET",
     });

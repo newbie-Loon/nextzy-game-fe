@@ -70,12 +70,12 @@ export default function HomePage() {
     const loadGameData = async () => {
       try {
         setLoading(true);
-        await initData(); // Wait for data to load
+        await initData();
 
       } catch (error) {
         console.error(error);
       } finally {
-        setLoading(false); // Called asynchronously inside a callback, which is safe
+        setLoading(false);
       }
     };
 
@@ -90,7 +90,7 @@ export default function HomePage() {
     <div className="mx-auto min-h-screen mx-auto max-w-lg min-w-md bg-gray-100 pr-6 pl-6 ">
       <div className="pb-24">
         <div className="pb-3">
-          <ProgressCard />
+          <ProgressCard userData={userData}/>
         </div>
 
         <div className="bg-white">
@@ -103,9 +103,9 @@ export default function HomePage() {
 
           <div className="mt-3">
             {activeTab === "play" ? (
-              <PlayHistoryList items={playHistory} />
+              <PlayHistoryList items={userData?.playHistory ?? []}/>
             ) : (
-              <RewardHistoryList items={rewardHistory} />
+              <RewardHistoryList items={userData?.rewardHistory ?? []} />
             )}
           </div>
         </div>

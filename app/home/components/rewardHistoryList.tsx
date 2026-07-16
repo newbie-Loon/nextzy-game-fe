@@ -1,7 +1,8 @@
-import { HistoryItem } from "@/app/interface/history";
+import { RewardHistory } from "@/app/interface/rewards";
+import { formatDateTime } from "@/app/util/date.util";
 
 interface Props {
-  items: HistoryItem[];
+  items: RewardHistory[];
 }
 
 export default function RewardHistoryList({
@@ -18,11 +19,11 @@ export default function RewardHistoryList({
 
           <div>
             <h3 className="text-lg font-bold text-[#333333]">
-              {item.title}
+              ได้รับรางวัล {item.reward}
             </h3>
 
             <p className="text-sm text-[#A3A3A3]">
-              ได้รับเมื่อ {item.date}
+              ได้รับเมื่อ {formatDateTime(item.createdAt)} น.
             </p>
           </div>
         </div>
